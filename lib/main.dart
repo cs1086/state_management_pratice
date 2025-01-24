@@ -31,9 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'State Management Demo',
-      home: Column(
-        children: [LoginStatusView(), Expanded(child: HomePage())],
-      ),
+      home: HomePage(),
     );
   }
 }
@@ -123,18 +121,20 @@ class HomePage extends StatelessWidget {
                       )),
             ),
           ),
-          ListTile(
-            title: Text('[Bloc] Complex Example'),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => BlocProvider(
-                        create: (_) =>
-                            FormBloc(authRepository: AuthRepository()),
-                        child: (BlocLoginForm()),
-                      )),
+          Column(children: [
+            ListTile(
+              title: Text('[Bloc] Complex Example'),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                      create: (_) => FormBloc(authRepository: AuthRepository()),
+                      child: BlocLoginForm(),
+                    ),
+                  )),
             ),
-          ),
+            LoginStatusView()
+          ]),
           ListTile(
             title: Text('[Cubit] Simple Example'),
             onTap: () => Navigator.push(

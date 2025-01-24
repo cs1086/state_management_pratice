@@ -37,6 +37,7 @@ class FormBloc extends Bloc<FormEvent, LoginFormState> {
       emit(state.copyWith(isSubmitting: true));
       try {
         if (authRepository.login(state.email, state.password)) {
+          print("state.isSuccess=.submit=true");
           emit(state.copyWith(isSuccess: true));
         }
         emit(state.copyWith(isSuccess: false));
